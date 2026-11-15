@@ -24,7 +24,7 @@ import sys
 from common import ROOT, plain_path
 
 LABS = ROOT / 'labs'
-LAB_RE = re.compile(r'lab[0-9]{1,3}')
+LAB_RE = re.compile(r'(?:lab|mocktest)[0-9]{1,3}')
 
 
 class Lab:
@@ -59,7 +59,7 @@ def available():
     if not LABS.is_dir():
         return []
     found = [p.name for p in LABS.iterdir() if LAB_RE.fullmatch(p.name) and (p / 'lab.json').is_file()]
-    return sorted(found, key=lambda name: int(name[3:]))
+    return sorted(found, key=lambda name: (name.startswith('mocktest'), int(name.lstrip('abcdefghijklmnopqrstuvwxyz'))))
 
 
 def choose(lab_id=None, ask=input):

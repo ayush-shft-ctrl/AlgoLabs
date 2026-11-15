@@ -14,6 +14,7 @@ Your access ZIP comes from your instructor's email, for example `Lab_4_student07
 | `lab5` | Bash automation and terminal workflows         | [labs/lab5/Lab_Book.md](labs/lab5/Lab_Book.md)                               |
 | `lab7` | Introduction to Git: commits, reset and revert | [labs/lab7/Lab_Book.md](labs/lab7/Lab_Book.md)                               |
 | `lab8` | Shell scripting and automation                 | [labs/lab8/Lab_Book.md](labs/lab8/Lab_Book.md)                               |
+| `mocktest1` | Mock Test 1: Linux basics, permissions, `cut` | [labs/mocktest1/Lab_Book.md](labs/mocktest1/Lab_Book.md)               |
 
 ---
 
@@ -94,12 +95,36 @@ Follow [labs/lab8/Lab_Book.md](labs/lab8/Lab_Book.md) (or `README.md` in your se
 
 ---
 
+## Mock Test 1 (mocktest1): Linux basics
+
+Mock Test 1 is worth 30 marks. You connect from the **Terminal** app on your Mac (not a Codespace), with the same access ZIP and server account:
+
+```bash
+cd ~/Downloads
+unzip -o Lab_4_studentNN_Access.zip
+cd Lab_4_studentNN_Access
+chmod 600 access/ssh_key
+ssh -i access/ssh_key studentNN@98.70.53.61    # type yes if asked
+```
+
+Then, on the server:
+
+```bash
+cd ~/lab-work/mocktest1/RollNo_Exam    # already created for you
+check_lab mocktest1                    # 2/30 before you start; check your score any time
+```
+
+The questions are in [labs/mocktest1/Lab_Book.md](labs/mocktest1/Lab_Book.md). Your folder `RollNo_Exam` (named after your roll number) and every answer file are already created, empty, on the server: write your answers into them and keep the exact file names. There is nothing to upload: your files on the server are graded.
+
+---
+
 ## Check your score
 
 ```bash
 check_lab lab5      # on the server: name the lab
 check_lab lab7      # Lab 7: Git
 check_lab lab8      # Lab 8: shell scripting
+check_lab mocktest1 # Mock Test 1
 ```
 
 - Grading runs on the server, and the tests are hidden.
