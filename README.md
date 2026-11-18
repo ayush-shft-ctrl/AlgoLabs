@@ -15,6 +15,7 @@ Your access ZIP comes from your instructor's email, for example `Lab_4_student07
 | `lab7` | Introduction to Git: commits, reset and revert | [labs/lab7/Lab_Book.md](labs/lab7/Lab_Book.md)                               |
 | `lab8` | Shell scripting and automation                 | [labs/lab8/Lab_Book.md](labs/lab8/Lab_Book.md)                               |
 | `mocktest1` | Mock Test 1: Linux basics, permissions, `cut` | [labs/mocktest1/Lab_Book.md](labs/mocktest1/Lab_Book.md)               |
+| `mocktest2` | Mock Test 2: `sort`/`uniq`, `tar`, `chmod`, a script | [labs/mocktest2/Lab_Book.md](labs/mocktest2/Lab_Book.md)        |
 
 ---
 
@@ -118,6 +119,19 @@ The questions are in [labs/mocktest1/Lab_Book.md](labs/mocktest1/Lab_Book.md). Y
 
 ---
 
+## Mock Test 2 (mocktest2): text processing, tar, permissions, scripting
+
+Mock Test 2 is worth 40 marks. Connect from the **Terminal** app on your Mac exactly as for [Mock Test 1](#mock-test-1-mocktest1-linux-basics), then, on the server:
+
+```bash
+cd ~/lab-work/mocktest2/RollNo_Exam    # already created for you
+check_lab mocktest2                    # 0/40 before you start; check your score any time
+```
+
+The questions are in [labs/mocktest2/Lab_Book.md](labs/mocktest2/Lab_Book.md). Your folder `RollNo_Exam` and most answer files are already created, empty, on the server: write your answers into them, keep the exact file names and do the questions in order.
+
+---
+
 ## Check your score
 
 ```bash
@@ -125,6 +139,7 @@ check_lab lab5      # on the server: name the lab
 check_lab lab7      # Lab 7: Git
 check_lab lab8      # Lab 8: shell scripting
 check_lab mocktest1 # Mock Test 1
+check_lab mocktest2 # Mock Test 2
 ```
 
 - Grading runs on the server, and the tests are hidden.
