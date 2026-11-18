@@ -8,7 +8,7 @@
 | Q1       | Text processing: merge, sort, uniq | 10     |
 | Q2       | Archiving with tar                 | 10     |
 | Q3       | File permissions                   | 10     |
-| Q4       | Shell script: common words (comm)  | 10     |
+| Q4       | Shell script: common keywords      | 10     |
 |          | **Total**                          | **40** |
 
 ---
@@ -139,11 +139,11 @@ Then:
 
 ---
 
-## Q4. Shell Script: Finding Common Words with comm | Marks: 10
+## Q4. Shell Script: Finding Common Keywords with grep | Marks: 10
 
-The files `commands/file1.txt`, `commands/file2.txt` and `commands/file3.txt` are already created and filled with test data (one word per line, **not sorted**). Do not change them.
+The files `commands/file1.txt` and `commands/file2.txt` are already created and filled with test data (one keyword per line). Do not change them.
 
-The script `scripts/common_words.sh` is already created and empty. It is run with the paths of two files as its arguments and prints the words that appear in both:
+The script `scripts/common_words.sh` is already created and empty. It is run with the paths of two files as its arguments and finds the keywords present in both files:
 
 ```bash
 ./scripts/common_words.sh commands/file1.txt commands/file2.txt
@@ -158,23 +158,21 @@ The script must:
    Error: Please provide two valid files.
    ```
 
-3. Otherwise, use `comm` to find the words present in both files. `comm` needs sorted input, so sort the files first, without modifying the original files.
-4. Print the common words in alphabetical order, one word per line.
-5. If there are no common words, print exactly:
+3. Otherwise, use `grep -f` to find the keywords present in both files, and save them in `outputs/q4_common.txt` (the script writes this file itself).
+4. If no common keywords are found, save this message in `outputs/q4_common.txt` instead:
 
    ```text
-   No common words found.
+   No common keywords found.
    ```
 
-6. Exit with status `0` after a successful run.
+5. Exit with status `0` after a successful run.
 
-Make the script executable, then run it three times. Save the requested stream in the first file and the exit status (`$?`) in the second (all files are already created):
+Make the script executable, then run it twice. Save the exit status (`$?`) of each run, and the error message of the second run, in these files (all are already created):
 
-| Run                                                              | Save                                         | Exit status                  |
-| ---------------------------------------------------------------- | -------------------------------------------- | ---------------------------- |
-| `./scripts/common_words.sh commands/file1.txt commands/file2.txt` | standard output → `outputs/q4_common.txt`    | `outputs/q4_common.status`   |
-| `./scripts/common_words.sh commands/file1.txt commands/file3.txt` | standard output → `outputs/q4_common2.txt`   | `outputs/q4_common2.status`  |
-| `./scripts/common_words.sh commands/file1.txt`                    | standard error → `outputs/q4_invalid.err`    | `outputs/q4_invalid.status`  |
+| Run                                                               | Output / error                                | Exit status                  |
+| ----------------------------------------------------------------- | --------------------------------------------- | ---------------------------- |
+| `./scripts/common_words.sh commands/file1.txt commands/file2.txt` | the script writes `outputs/q4_common.txt`     | `outputs/q4_common.status`   |
+| `./scripts/common_words.sh commands/file1.txt`                    | standard error → `outputs/q4_invalid.err`     | `outputs/q4_invalid.status`  |
 
 ---
 
