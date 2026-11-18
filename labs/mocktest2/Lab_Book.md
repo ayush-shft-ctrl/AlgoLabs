@@ -167,12 +167,19 @@ The script must:
 
 5. Exit with status `0` after a successful run.
 
-Make the script executable, then run it twice. Save the exit status (`$?`) of each run, and the error message of the second run, in these files (all are already created):
+Make the script executable and run these two tests from the main folder. Copy each line exactly. Test 1 lets the script write `outputs/q4_common.txt` itself; Test 2 saves standard error in `.err`. Both save the exit status in `.status` (all files are already created):
 
-| Run                                                               | Output / error                                | Exit status                  |
-| ----------------------------------------------------------------- | --------------------------------------------- | ---------------------------- |
-| `./scripts/common_words.sh commands/file1.txt commands/file2.txt` | the script writes `outputs/q4_common.txt`     | `outputs/q4_common.status`   |
-| `./scripts/common_words.sh commands/file1.txt`                    | standard error → `outputs/q4_invalid.err`     | `outputs/q4_invalid.status`  |
+```bash
+chmod u+x scripts/common_words.sh
+
+# Test 1: two valid files (the script writes outputs/q4_common.txt)
+./scripts/common_words.sh commands/file1.txt commands/file2.txt; echo $? > outputs/q4_common.status
+
+# Test 2: only one argument
+./scripts/common_words.sh commands/file1.txt 2> outputs/q4_invalid.err; echo $? > outputs/q4_invalid.status
+```
+
+Check your results with `cat outputs/q4_common.txt outputs/q4_common.status outputs/q4_invalid.err outputs/q4_invalid.status`.
 
 ---
 
