@@ -8,7 +8,7 @@
 | Q1       | Text processing: merge, sort, uniq | 10     |
 | Q2       | Archiving with tar                 | 10     |
 | Q3       | File permissions                   | 10     |
-| Q4       | Shell script: file information     | 10     |
+| Q4       | Shell script: common words (comm)  | 10     |
 |          | **Total**                          | **40** |
 
 ---
@@ -124,13 +124,13 @@ ls -ld secure
 
 Every file starts as `-rw-r--r--` and the folder as `drwxr-xr-x`. Use `chmod` to give them exactly these permissions:
 
-| Target               | Who gets what                                                  | Result in `ls -l` |
-| -------------------- | -------------------------------------------------------------- | ----------------- |
-| `secure/private.txt` | owner: read, write · group: nothing · others: nothing          | `-rw-------`      |
-| `secure/public.txt`  | everyone (owner, group, others): read only, nobody can write   | `-r--r--r--`      |
-| `secure/team.txt`    | keep everything as it is, only **remove read for others**      | `-rw-r-----`      |
-| `secure/deploy.sh`   | owner: read, write, execute · group: read, execute · others: nothing | `-rwxr-x---` |
-| `secure/` (folder)   | owner: read, write, enter · group: read, enter · others: nothing | `drwxr-x---`    |
+| Target               | Who gets what                                                        | Result in `ls -l` |
+| -------------------- | -------------------------------------------------------------------- | ----------------- |
+| `secure/private.txt` | owner: read, write · group: nothing · others: nothing                | `-rw-------`      |
+| `secure/public.txt`  | everyone (owner, group, others): read only, nobody can write         | `-r--r--r--`      |
+| `secure/team.txt`    | keep everything as it is, only **remove read for others**            | `-rw-r-----`      |
+| `secure/deploy.sh`   | owner: read, write, execute · group: read, execute · others: nothing | `-rwxr-x---`      |
+| `secure/` (folder)   | owner: read, write, enter · group: read, enter · others: nothing     | `drwxr-x---`      |
 
 Then:
 
@@ -139,32 +139,42 @@ Then:
 
 ---
 
-## Q4. Shell Script: File Information | Marks: 10
+## Q4. Shell Script: Finding Common Words with comm | Marks: 10
 
-The script `scripts/file_info.sh` is already created and empty. It is run with the path of one file as its argument:
+The files `commands/file1.txt`, `commands/file2.txt` and `commands/file3.txt` are already created and filled with test data (one word per line, **not sorted**). Do not change them.
+
+The script `scripts/common_words.sh` is already created and empty. It is run with the paths of two files as its arguments and prints the words that appear in both:
 
 ```bash
-./scripts/file_info.sh commands/notes.txt
+./scripts/common_words.sh commands/file1.txt commands/file2.txt
 ```
 
 The script must:
 
 1. Start with the shebang line `#!/usr/bin/env bash`.
-2. If no argument is given, or the file does not exist, print `Error: file not found` to standard error and exit with status `1`.
-3. Otherwise, print the file name, its number of lines and its number of words (use `wc`), exactly in this format, and exit with status `0`:
+2. Use `if`-`else` and the `-f` test: if fewer than two arguments are given, or either file does not exist, print this message to standard error and exit with status `1`:
 
    ```text
-   File: commands/notes.txt
-   Lines: 3
-   Words: 11
+   Error: Please provide two valid files.
    ```
 
-Make the script executable, then run it twice. Save the requested stream in the first file and the exit status (`$?`) in the second (all files are already created):
+3. Otherwise, use `comm` to find the words present in both files. `comm` needs sorted input, so sort the files first, without modifying the original files.
+4. Print the common words in alphabetical order, one word per line.
+5. If there are no common words, print exactly:
 
-| Run                                           | Save                                      | Exit status                 |
-| --------------------------------------------- | ----------------------------------------- | --------------------------- |
-| `./scripts/file_info.sh commands/notes.txt`   | standard output → `outputs/q4_notes.txt`  | `outputs/q4_notes.status`   |
-| `./scripts/file_info.sh commands/missing.txt` | standard error → `outputs/q4_missing.err` | `outputs/q4_missing.status` |
+   ```text
+   No common words found.
+   ```
+
+6. Exit with status `0` after a successful run.
+
+Make the script executable, then run it three times. Save the requested stream in the first file and the exit status (`$?`) in the second (all files are already created):
+
+| Run                                                              | Save                                         | Exit status                  |
+| ---------------------------------------------------------------- | -------------------------------------------- | ---------------------------- |
+| `./scripts/common_words.sh commands/file1.txt commands/file2.txt` | standard output → `outputs/q4_common.txt`    | `outputs/q4_common.status`   |
+| `./scripts/common_words.sh commands/file1.txt commands/file3.txt` | standard output → `outputs/q4_common2.txt`   | `outputs/q4_common2.status`  |
+| `./scripts/common_words.sh commands/file1.txt`                    | standard error → `outputs/q4_invalid.err`    | `outputs/q4_invalid.status`  |
 
 ---
 
